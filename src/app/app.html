@@ -1,0 +1,21 @@
+<header class="header">Header</header>
+<main class="content">
+  <article id="url-form" class="card">
+    <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="form">
+      <label for="url">URL</label>
+      <input type="text" id="url" class="form-control" formControlName="url" />
+      <button type="submit">Cadastrar</button>
+      @if (urlForm.touched && urlForm.invalid) {
+        <span class="form-error" style="color: red;">URL inválida</span>
+      }
+    </form>
+  </article>
+  <article id="url-list" class="card">
+    <ul style="list-style-type: none;">
+      @for (url of urls; track $index) {
+        <li><a href="#" (click)="accessUrl(url.originalUrl); $event.preventDefault()">{{ url.originalUrl }}</a>: <a href="#" (click)="accessUrl(url.shortUrl); $event.preventDefault()">{{ url.shortUrl }}</a></li>
+      }
+    </ul>
+  </article>
+</main>
+<footer class="footer">Footer</footer>
