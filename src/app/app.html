@@ -1,21 +1,51 @@
-<header class="header">Header</header>
-<main class="content">
-  <article id="url-form" class="card">
-    <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="form">
-      <label for="url">URL</label>
-      <input type="text" id="url" class="form-control" formControlName="url" />
-      <button type="submit">Cadastrar</button>
-      @if (urlForm.touched && urlForm.invalid) {
-        <span class="form-error" style="color: red;">URL inválida</span>
-      }
-    </form>
-  </article>
-  <article id="url-list" class="card">
-    <ul style="list-style-type: none;">
-      @for (url of urls; track $index) {
-        <li><a href="#" (click)="accessUrl(url.originalUrl); $event.preventDefault()">{{ url.originalUrl }}</a>: <a href="#" (click)="accessUrl(url.shortUrl); $event.preventDefault()">{{ url.shortUrl }}</a></li>
-      }
-    </ul>
-  </article>
-</main>
-<footer class="footer">Footer</footer>
+<div class="min-h-screen flex flex-col">
+  <header class="p-2 text-white bg-gray-500">
+    <h3 class="text-xl sm:text-md">vai.la</h3>
+  </header>
+  <main class="flex-1 flex flex-col">
+    <mat-card class="mx-auto my-6 max-w-sm sm:max-w-xl p-6 items-center gap-4">
+      <mat-card-header>
+        <mat-card-title>Cadastrar URL</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="columns-md">
+        <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+          <mat-form-field>
+            <mat-label>URL</mat-label>
+            <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url">
+          </mat-form-field>
+          <button class="self-center" type="submit" matButton="filled">Cadastrar</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="mx-auto my-6 max-w-md sm:max-w-xl">
+      <mat-card-header></mat-card-header>
+      <mat-card-content>
+        <mat-nav-list>
+          @for (url of urls; track $index) {
+            <div class="flex">
+              <a mat-list-item
+                [href]="url.shortUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                [title]="url.originalUrl">
+                <fa-icon class="mr-4" icon="arrow-up-right-from-square" />
+                {{ url.shortUrl }}
+              </a>
+              <button class="mr-6 sm:mr-4" type="submit" matButton="outlined">
+                <fa-icon icon="copy" />
+              </button>
+              <button type="submit" matButton="outlined">
+                <fa-icon class="text-red-900" icon="trash" />
+              </button>
+            </div>
+          }
+        </mat-nav-list>
+        <mat-paginator [length]="urls.length"
+                [pageSize]="10"
+                aria-label="Select page">
+        </mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </main>
+  <footer class="p-2 text-right text-white bg-gray-500">Desenvolvido com <fa-icon icon="heart" /> por Thiago Carvalho Füllenbach</footer>
+</div>

@@ -1,4 +1,8 @@
-body, body * {
-  box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
+@import "tailwindcss";
+
+html, body {
+  height: 100%; box-sizing: border-box;
+}
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
