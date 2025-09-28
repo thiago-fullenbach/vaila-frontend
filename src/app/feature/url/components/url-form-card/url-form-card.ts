@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { UrlFormModel } from './model/url-form-model';
+import { UrlFormModel } from '../../model/url-form-model';
 
 @Component({
   selector: 'vaila-url-form-card',
@@ -13,7 +13,7 @@ import { UrlFormModel } from './model/url-form-model';
     MatButtonModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './url-form-card.html'
+  templateUrl: './url-form-card.html',
 })
 export class UrlFormCard {
   readonly urlPattern = /^(https?:\/\/)([\w-]+(\.[\w-]+)+)(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;

@@ -5,6 +5,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faArrowUpRightFromSquare, faCopy, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { UrlListModel } from '../../model/url-list-model';
 
 @Component({
   selector: 'vaila-url-list-card',
@@ -38,12 +39,6 @@ export class UrlListCard implements AfterViewInit {
     // TODO: Implement
     console.log(`Delete URL: ${hash}`)
   }
-}
-
-interface UrlListModel {
-  hash: string,
-  shortUrl: string,
-  originalUrl: string
 }
 
 // Mock
