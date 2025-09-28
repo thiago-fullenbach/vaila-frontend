@@ -6,13 +6,13 @@
     <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="flex flex-col">
       <mat-form-field>
         <mat-label>URL</mat-label>
-        <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url" [disabled]="isLoading()">
+        <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url">
       </mat-form-field>
       @if(urlForm.invalid && urlForm.touched) {
         <p class="text-red-900 mb-2">URL inválida</p>
       }
 
-      @if(isLoading()) {
+      @if(loading()) {
         <mat-spinner class="self-center" />
       } @else {
         <button class="self-center" type="submit" matButton="filled" [disabled]="urlForm.invalid">Encurtar</button>

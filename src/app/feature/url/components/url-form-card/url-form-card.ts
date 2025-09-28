@@ -7,11 +7,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import { UrlFormModel } from '../../model/url-form-model';
-import { UrlDTO, UrlService } from '../../service/url-service';
-import { UrlServiceImpl } from '../../service/url-service-impl';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { UrlService } from '../../service/url-service';
 
 @Component({
   selector: 'vaila-url-form-card',
@@ -29,36 +27,31 @@ export class UrlFormCard {
   readonly snackbarDuration = 5000;
   readonly urlPattern = /^(https?:\/\/)([\w-]+(\.[\w-]+)+)(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
 
-  private urlService: UrlService = inject(UrlServiceImpl);
+  loading = signal<boolean>(false);
+  outputUrl = signal<string>('');
+
+  private urlService: UrlService = inject(UrlService);
   private snackbar: MatSnackBar = inject(MatSnackBar);
 
-  outputUrl = signal<string>('');
-  isLoading = signal<boolean>(false);
-
-  urlForm: FormGroup<UrlFormModel>;
+  urlForm: FormGroup<any>;
 
   constructor(fb: FormBuilder, library: FaIconLibrary) {
-    this.urlForm = fb.group<UrlFormModel>({
-      url: fb.control('', { nonNullable:true, validators: [Validators.required, Validators.pattern(this.urlPattern)] })
+    this.urlForm = fb.group({
+      url: fb.control<string>('', { nonNullable:true, validators: [Validators.required, Validators.pattern(this.urlPattern)] })
     })
     library.addIcons(faArrowUpRightFromSquare);
   }
 
   onSubmit() {
+    this.loading.set(true);
     let url: string = this.urlForm.value.url!;
-    this.isLoading.update(c => !c);
-    this.urlService.createUrl(url).subscribe({
-      next: (urlDTO: UrlDTO) => {
-        this.isLoading.update(c => !c);
-        this.outputUrl.update(() => urlDTO.shortUrl)
-        this.snackbar.open("URL encurtada", '', {
-          duration: this.snackbarDuration
-        })
-      },
-      error: (err) => {
-        this.isLoading.update(c => !c);
-        console.error(`Erro ao salvar URL: ${err}`);
-      }
+    this.urlService.createUrl(url).subscribe(url => {
+      this.outputUrl.set(url.shortUrl);
+      this.urlService.triggerListUpdateEvent();
+      this.loading.set(false);
+      this.snackbar.open('URL salva', '', {
+        duration: 3000
+      })
     });
   }
 }

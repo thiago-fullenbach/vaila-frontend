@@ -1,4 +1,4 @@
-export interface UrlListModel {
+export interface UrlDTO {
   hash: string,
   shortUrl: string,
   originalUrl: string
