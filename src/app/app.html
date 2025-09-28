@@ -2,35 +2,7 @@
   <vaila-header />
   <main class="flex-1 flex flex-col">
     <vaila-url-form-card />
-    <mat-card class="mx-auto my-6 max-w-md sm:max-w-xl">
-      <mat-card-header></mat-card-header>
-      <mat-card-content>
-        <mat-nav-list>
-          @for (url of urls; track $index) {
-            <div class="flex">
-              <a mat-list-item
-                [href]="url.shortUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                [title]="url.originalUrl">
-                <fa-icon class="mr-4" icon="arrow-up-right-from-square" />
-                {{ url.shortUrl }}
-              </a>
-              <button class="mr-6 sm:mr-4" type="submit" matButton="outlined">
-                <fa-icon icon="copy" />
-              </button>
-              <button type="submit" matButton="outlined">
-                <fa-icon class="text-red-900" icon="trash" />
-              </button>
-            </div>
-          }
-        </mat-nav-list>
-        <mat-paginator [length]="urls.length"
-                [pageSize]="10"
-                aria-label="Select page">
-        </mat-paginator>
-      </mat-card-content>
-    </mat-card>
+    <vaila-url-list-card />
   </main>
   <vaila-footer />
 </div>
