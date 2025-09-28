@@ -1,0 +1,14 @@
+<mat-card class="mx-auto my-6 max-w-sm sm:max-w-xl p-6 items-center gap-4">
+  <mat-card-header>
+    <mat-card-title>Cadastrar URL</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="columns-md">
+    <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+      <mat-form-field>
+        <mat-label>URL</mat-label>
+        <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url">
+      </mat-form-field>
+      <button class="self-center" type="submit" matButton="filled">Cadastrar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
