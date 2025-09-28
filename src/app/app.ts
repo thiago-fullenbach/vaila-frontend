@@ -1,5 +1,5 @@
-import { faArrowUpRightFromSquare, faCopy, faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Component, inject, signal } from '@angular/core';
+import { faArrowUpRightFromSquare, faCopy, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { Header } from './shared/header/header';
+import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'vaila-root',
@@ -20,7 +23,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     MatListModule,
     MatPaginatorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    Header,
+    Footer
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
@@ -43,7 +48,7 @@ export class App {
   ];
 
   constructor(library: FaIconLibrary) {
-    library.addIcons(faArrowUpRightFromSquare, faCopy, faTrash, faHeart);
+    library.addIcons(faArrowUpRightFromSquare, faCopy, faTrash);
   }
 
   onSubmit() {
