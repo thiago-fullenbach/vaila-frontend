@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import { Header } from './shared/header/header';
-import { UrlFormCard } from './feature/url-form-card/url-form-card';
-import { UrlListCard } from "./feature/url-list-card/url-list-card";
+import { UrlFormCard } from './feature/url/components/url-form-card/url-form-card';
+import { UrlListCard } from "./feature/url/components/url-list-card/url-list-card";
 import { Footer } from './shared/footer/footer';
 
 @Component({
