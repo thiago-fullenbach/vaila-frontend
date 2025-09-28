@@ -6,9 +6,27 @@
     <form [formGroup]="urlForm" (ngSubmit)="onSubmit()" class="flex flex-col">
       <mat-form-field>
         <mat-label>URL</mat-label>
-        <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url">
+        <input matInput placeholder="Ex. http://www.google.com.br" formControlName="url" [disabled]="isLoading()">
       </mat-form-field>
-      <button class="self-center" type="submit" matButton="filled">Cadastrar</button>
+      @if(urlForm.invalid && urlForm.touched) {
+        <p class="text-red-900 mb-2">URL inválida</p>
+      }
+
+      @if(isLoading()) {
+        <mat-spinner class="self-center" />
+      } @else {
+        <button class="self-center" type="submit" matButton="filled" [disabled]="urlForm.invalid">Encurtar</button>
+
+        @if(outputUrl()) {
+          <div class="mt-4 text-md md:mt-6 self-center">
+            <p class="mx-auto my-2 text-center font-bold">URL encurtada </p>
+            <a [href]="outputUrl()" target="_blank" rel="noopener noreferrer" matButton="text">
+              <fa-icon icon="arrow-up-right-from-square" />
+              {{ outputUrl() }}
+            </a>
+          </div>
+        }
+      }
     </form>
   </mat-card-content>
 </mat-card>
