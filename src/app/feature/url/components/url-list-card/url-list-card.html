@@ -4,7 +4,7 @@
   </mat-card-header>
   <mat-card-content>
     @if (loading()) {
-      <mat-spinner class="self-center" />
+      <mat-spinner class="mx-auto my-4" />
     }
 
     <table [hidden]="loading()" mat-table [dataSource]="dataSource">

@@ -47,12 +47,10 @@ export class UrlListCard implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this._paginator.page.subscribe(event => {
-      this.pageIndex = event.pageIndex;
-      this.pageSize = event.pageSize;
       this.loadUrls(event.pageIndex, event.pageSize);
     })
 
-    this.urlService.listUpdateEvent().subscribe(() => {
+    this.urlService.listUpdateEvent.subscribe(() => {
       this.loadUrls(this.pageIndex, this.pageSize);
     })
   }
