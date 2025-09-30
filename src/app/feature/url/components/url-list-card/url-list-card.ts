@@ -26,6 +26,7 @@ import { UrlDTO } from '../../service/dto/url-dto';
 })
 export class UrlListCard implements OnInit, AfterViewInit {
   readonly displayedColumns: string[] = ['hash', 'url', 'actions'];
+  readonly baseUrl = `${window.location.origin}/api/url`;
 
   totalUrls: number = 0;
   pageSize: number = 10;
@@ -67,7 +68,7 @@ export class UrlListCard implements OnInit, AfterViewInit {
   }
 
   copyUrl(url: string) {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(`${this.baseUrl}${url}`);
   }
 
   deleteUrl(hash: string) {

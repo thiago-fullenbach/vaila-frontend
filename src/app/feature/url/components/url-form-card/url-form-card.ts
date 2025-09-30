@@ -26,6 +26,7 @@ import { UrlService } from '../../service/url-service';
 export class UrlFormCard {
   readonly snackbarDuration = 5000;
   readonly urlPattern = /^(https?:\/\/)([\w-]+(\.[\w-]+)+)(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
+  readonly baseUrl = `${window.location.origin}/api/url`;
 
   loading = signal<boolean>(false);
   outputUrl = signal<string>('');
@@ -46,7 +47,7 @@ export class UrlFormCard {
     this.loading.set(true);
     let url: string = this.urlForm.value.url!;
     this.urlService.createUrl(url).subscribe(url => {
-      this.outputUrl.set(url.shortUrl);
+      this.outputUrl.set(this.baseUrl + url.shortUrl);
       this.urlService.triggerListUpdateEvent();
       this.loading.set(false);
       this.snackbar.open('URL salva', '', {

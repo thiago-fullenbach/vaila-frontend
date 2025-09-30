@@ -16,7 +16,7 @@
       <ng-container matColumnDef="url">
         <th mat-header-cell *matHeaderCellDef>URL</th>
         <td mat-cell *matCellDef="let url">
-          <a [href]="url.shortUrl" [title]="url.originalUrl" target="_blank" rel="noopener noreferrer">
+          <a [href]="baseUrl + url.shortUrl" [title]="url.originalUrl" target="_blank" rel="noopener noreferrer">
             <fa-icon class="mr-4" icon="arrow-up-right-from-square" />
             <span class="hidden md:inline">{{ url.shortUrl }}</span>
           </a>
