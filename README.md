@@ -1,59 +1,203 @@
-# Vaila
+# Vaila Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+## English
 
-## Development server
+### Overview
 
-To start a local development server, run:
+This repository contains the frontend for the Vaila application, built with Angular 20.
+It provides a UI to create, list, and delete shortened URLs.
 
-```bash
-ng serve
-```
+The frontend expects a backend API to be available on port `3200`.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Tech Stack
 
-## Code scaffolding
+- Angular 20
+- Angular Material
+- Tailwind CSS 4
+- Node.js 20+
+- Docker + Nginx for containerized serving
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+Before running the project, make sure you have:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Node.js `20` or newer
+- npm
+- Docker and Docker Compose, if you want to run the containerized version
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Install Dependencies
 
 ```bash
-ng build
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Run Locally
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Start the development server:
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+The app will be available at:
 
-For end-to-end (e2e) testing, run:
+```text
+http://localhost:4200
+```
+
+### Backend Requirement
+
+During local development, Angular uses the proxy file [`src/proxy.conf.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/src/proxy.conf.json) to forward requests from `/api` to:
+
+```text
+http://localhost:3200
+```
+
+That means the backend must be running locally on port `3200`.
+
+### Available Scripts
+
+- `npm start`: starts the Angular development server
+- `npm run build`: creates a production build
+- `npm run watch`: builds in development mode with watch enabled
+- `npm test`: runs unit tests with Karma
+
+### Production Build
+
+To generate the production build:
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Run with Docker
 
-## Additional Resources
+Build and start the container:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+docker compose up --build
+```
+
+The container serves the app at:
+
+```text
+http://localhost:4200
+```
+
+Inside Docker, Nginx also forwards `/api` requests to:
+
+```text
+http://host.docker.internal:3200
+```
+
+So the backend must still be available on port `3200` on the host machine.
+
+### Project Structure
+
+- [`package.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/package.json): project scripts and dependencies
+- [`angular.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/angular.json): Angular build and serve configuration
+- [`Dockerfile`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/Dockerfile): container build
+- [`docker-compose.yaml`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/docker-compose.yaml): local container orchestration
+- [`nginx.conf`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/nginx.conf): Nginx SPA and API proxy configuration
+
+---
+
+## Portugues (Brasil)
+
+### Visao Geral
+
+Este repositorio contem o frontend da aplicacao Vaila, construido com Angular 20.
+Ele oferece uma interface para criar, listar e remover URLs encurtadas.
+
+O frontend espera que a API backend esteja disponivel na porta `3200`.
+
+### Tecnologias
+
+- Angular 20
+- Angular Material
+- Tailwind CSS 4
+- Node.js 20+
+- Docker + Nginx para execucao em container
+
+### Pre-requisitos
+
+Antes de executar o projeto, garanta que voce tenha:
+
+- Node.js `20` ou superior
+- npm
+- Docker e Docker Compose, caso queira executar a versao em container
+
+### Instalar Dependencias
+
+```bash
+npm install
+```
+
+### Executar Localmente
+
+Inicie o servidor de desenvolvimento:
+
+```bash
+npm start
+```
+
+A aplicacao ficara disponivel em:
+
+```text
+http://localhost:4200
+```
+
+### Requisito do Backend
+
+Durante o desenvolvimento local, o Angular usa o arquivo [`src/proxy.conf.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/src/proxy.conf.json) para encaminhar requisicoes de `/api` para:
+
+```text
+http://localhost:3200
+```
+
+Isso significa que o backend precisa estar em execucao localmente na porta `3200`.
+
+### Scripts Disponiveis
+
+- `npm start`: inicia o servidor de desenvolvimento do Angular
+- `npm run build`: gera o build de producao
+- `npm run watch`: gera o build em modo de desenvolvimento com watch
+- `npm test`: executa os testes unitarios com Karma
+
+### Build de Producao
+
+Para gerar o build de producao:
+
+```bash
+npm run build
+```
+
+### Executar com Docker
+
+Para construir e iniciar o container:
+
+```bash
+docker compose up --build
+```
+
+O container publica a aplicacao em:
+
+```text
+http://localhost:4200
+```
+
+Dentro do Docker, o Nginx tambem encaminha as requisicoes `/api` para:
+
+```text
+http://host.docker.internal:3200
+```
+
+Portanto, o backend tambem precisa estar disponivel na porta `3200` na maquina host.
+
+### Estrutura do Projeto
+
+- [`package.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/package.json): scripts e dependencias do projeto
+- [`angular.json`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/angular.json): configuracao de build e execucao do Angular
+- [`Dockerfile`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/Dockerfile): build do container
+- [`docker-compose.yaml`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/docker-compose.yaml): orquestracao local com container
+- [`nginx.conf`](/D:/Estudos_Programacao/vaila/Frontend/vaila-frontend/nginx.conf): configuracao do Nginx para SPA e proxy da API
